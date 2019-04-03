@@ -7,9 +7,9 @@
         xmlns:local="clr-namespace:AFD"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-        x:Class="AFD.MainWindow"
+        x:Class="AFD.MainWindow"    
         mc:Ignorable="d"
-        Title="AFD" Height="450" Width="500">
+        Title="AFD" Height="450" Width="500" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*" />
@@ -37,31 +37,100 @@
             <GroupBox Header="Entrada de información" Grid.Row="2" Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" Height="26">Cadena de entrada</TextBlock>
-                    <TextBox Width="110" Height="26" Margin="10 0 0 0" Style="{StaticResource SimpleTextBox}"></TextBox>
-                    <Button Content="Iniciar validación" Height="26" Margin="10 0 0 0"  Background="#FFF9F7F7"/>
+                    <TextBox x:Name="txtCadena" Width="110" Height="26" Margin="10 0 0 0" Style="{StaticResource SimpleTextBox}"></TextBox>
+                    <Button x:Name="btnIniciar" Content="Iniciar validación" Height="26" Margin="10 0 0 0"  Background="#FFF9F7F7" Click="btnIniciar_Click"/>
                 </StackPanel>
             </GroupBox>
         </Grid>
         <Grid Grid.Row="1">
-            <GroupBox Header="Graficación">
-                <Canvas>
-                    <Ellipse  Height="47" Canvas.Left="10" Stroke="Black" Canvas.Top="62.44" Width="51"/>
-                    <TextBlock>q1</TextBlock>
-                    <ed:LineArrow  Height="0" Canvas.Left="61" Stroke="Black" Canvas.Top="86" Width="82"/>
-                    <Ellipse  Height="47" Canvas.Left="144" Stroke="Black" Canvas.Top="62.44" Width="51"/>
-                    <Path Data="M13,4.07V1L8.45,5.55L13,10V6.09C15.84,6.57 18,9.03 18,12C18,14.97 15.84,17.43 13,17.91V19.93C16.95,19.44 20,16.08 20,12C20,7.92 16.95,4.56 13,4.07M7.1,18.32C8.26,19.22 9.61,19.76 11,19.93V17.9C10.13,17.75 9.29,17.41 8.54,16.87L7.1,18.32M6.09,13H4.07C4.24,14.39 4.79,15.73 5.69,16.89L7.1,15.47C6.58,14.72 6.23,13.88 6.09,13M7.11,8.53L5.7,7.11C4.8,8.27 4.24,9.61 4.07,11H6.09C6.23,10.13 6.58,9.28 7.11,8.53Z" Fill="Black" Canvas.Left="39.453" Canvas.Top="44.132" RenderTransformOrigin="0.5,0.5" Height="24.666" Stretch="Fill" Width="23.094" >
-                        <Path.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-101.839"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Path.RenderTransform>
-                    </Path>
-                    <ed:LineArrow  Height="0" Canvas.Left="194" Stroke="Black" Canvas.Top="86" Width="82"/>
-                    <ed:Arc ArcThickness="5" ArcThicknessUnit="Pixel" EndAngle="360" ed:GeometryEffect.GeometryEffect="Sketch" Height="47.44" Canvas.Left="276.5" Stretch="None" StartAngle="0" Canvas.Top="62" Width="48.5" Stroke="Black"/>
-                </Canvas>
+            <GroupBox Header="Graficación" >
+                <Grid Margin="40 0 0 0">
+                    <Canvas>
+                        <Ellipse x:Name="q0"  Height="47" Canvas.Left="10" Stroke="Black" Canvas.Top="62.44" Width="51">
+                        </Ellipse>
+                        <TextBlock Canvas.Left="27.332" Canvas.Top="75.048">q0</TextBlock>
+                        <ed:LineArrow x:Name="q0Line"  Height="0" Canvas.Left="61" Stroke="Black" Canvas.Top="86" Width="82"/>
+                        <Ellipse x:Name="q1"  Height="47" Canvas.Left="144" Stroke="Black" Canvas.Top="62.44" Width="51"/>
+                        <Path x:Name="q0Return" Data="M13,4.07V1L8.45,5.55L13,10V6.09C15.84,6.57 18,9.03 18,12C18,14.97 15.84,17.43 13,17.91V19.93C16.95,19.44 20,16.08 20,12C20,7.92 16.95,4.56 13,4.07M7.1,18.32C8.26,19.22 9.61,19.76 11,19.93V17.9C10.13,17.75 9.29,17.41 8.54,16.87L7.1,18.32M6.09,13H4.07C4.24,14.39 4.79,15.73 5.69,16.89L7.1,15.47C6.58,14.72 6.23,13.88 6.09,13M7.11,8.53L5.7,7.11C4.8,8.27 4.24,9.61 4.07,11H6.09C6.23,10.13 6.58,9.28 7.11,8.53Z" Fill="Black" Canvas.Left="38.324" Canvas.Top="36.091" RenderTransformOrigin="0.5,0.5" Height="38.084" Stretch="Fill" Width="32.544" >
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-101.839"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <ed:LineArrow x:Name="q1Lineb"  Height="0" Canvas.Left="194" Stroke="Black" Canvas.Top="86" Width="82"/>
+                        <ed:Arc x:Name="q2" ArcThickness="5" ArcThicknessUnit="Pixel" EndAngle="360" ed:GeometryEffect.GeometryEffect="Sketch" Height="47.44" Canvas.Left="276.5" Stretch="None" StartAngle="0" Canvas.Top="62" Width="48.5" Stroke="Black"/>
+                        <ed:LineArrow x:Name="q1Linec"  Height="0" Canvas.Left="153.153" Stroke="Black" Canvas.Top="127.152" Width="35.97" RenderTransformOrigin="0.5,0.5">
+                            <ed:LineArrow.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="90.092"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ed:LineArrow.RenderTransform>
+                        </ed:LineArrow>
+                        <Ellipse x:Name="q3"  Height="47" Canvas.Left="144" Stroke="Black" Canvas.Top="143.44" Width="51"/>
+                        <ed:LineArrow x:Name="q3Line"  Height="32.402" Canvas.Left="129.279" Stroke="Black" Canvas.Top="108.966" Width="40.442" RenderTransformOrigin="0.5,0.5">
+                            <ed:LineArrow.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="227.175"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ed:LineArrow.RenderTransform>
+                        </ed:LineArrow>
+                        <Path x:Name="q1Return" Data="M13,4.07V1L8.45,5.55L13,10V6.09C15.84,6.57 18,9.03 18,12C18,14.97 15.84,17.43 13,17.91V19.93C16.95,19.44 20,16.08 20,12C20,7.92 16.95,4.56 13,4.07M7.1,18.32C8.26,19.22 9.61,19.76 11,19.93V17.9C10.13,17.75 9.29,17.41 8.54,16.87L7.1,18.32M6.09,13H4.07C4.24,14.39 4.79,15.73 5.69,16.89L7.1,15.47C6.58,14.72 6.23,13.88 6.09,13M7.11,8.53L5.7,7.11C4.8,8.27 4.24,9.61 4.07,11H6.09C6.23,10.13 6.58,9.28 7.11,8.53Z" Fill="Black" Canvas.Left="172.991" Canvas.Top="36.758" RenderTransformOrigin="0.5,0.5" Height="38.084" Stretch="Fill" Width="32.544" >
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-101.839"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path x:Name="q2Return" Data="M13,4.07V1L8.45,5.55L13,10V6.09C15.84,6.57 18,9.03 18,12C18,14.97 15.84,17.43 13,17.91V19.93C16.95,19.44 20,16.08 20,12C20,7.92 16.95,4.56 13,4.07M7.1,18.32C8.26,19.22 9.61,19.76 11,19.93V17.9C10.13,17.75 9.29,17.41 8.54,16.87L7.1,18.32M6.09,13H4.07C4.24,14.39 4.79,15.73 5.69,16.89L7.1,15.47C6.58,14.72 6.23,13.88 6.09,13M7.11,8.53L5.7,7.11C4.8,8.27 4.24,9.61 4.07,11H6.09C6.23,10.13 6.58,9.28 7.11,8.53Z" Fill="Black" Canvas.Left="302.99" Canvas.Top="36.091" RenderTransformOrigin="0.5,0.5" Height="38.084" Stretch="Fill" Width="32.544" >
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-101.839"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path x:Name="q3Return" Data="M13,4.07V1L8.45,5.55L13,10V6.09C15.84,6.57 18,9.03 18,12C18,14.97 15.84,17.43 13,17.91V19.93C16.95,19.44 20,16.08 20,12C20,7.92 16.95,4.56 13,4.07M7.1,18.32C8.26,19.22 9.61,19.76 11,19.93V17.9C10.13,17.75 9.29,17.41 8.54,16.87L7.1,18.32M6.09,13H4.07C4.24,14.39 4.79,15.73 5.69,16.89L7.1,15.47C6.58,14.72 6.23,13.88 6.09,13M7.11,8.53L5.7,7.11C4.8,8.27 4.24,9.61 4.07,11H6.09C6.23,10.13 6.58,9.28 7.11,8.53Z" Fill="Black" Canvas.Left="190.324" Canvas.Top="142.758" RenderTransformOrigin="0.5,0.5" Height="38.084" Stretch="Fill" Width="32.544" >
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-51.707"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <TextBlock Canvas.Left="161.332" Canvas.Top="78.058"><Run Text="q1"/></TextBlock>
+                        <TextBlock Canvas.Left="294.665" Canvas.Top="75.048"><Run Text="q2"/></TextBlock>
+                        <TextBlock Canvas.Left="161.332" Canvas.Top="157.714"><Run Text="q3"/></TextBlock>
+                        <TextBlock Canvas.Left="68.665" Canvas.Top="26.38"><Run Text="b,c"/></TextBlock>
+                        <TextBlock Canvas.Left="201.998" Canvas.Top="26.38"><Run Text="a"/></TextBlock>
+                        <TextBlock Canvas.Left="333.331" Canvas.Top="26.38"><Run Text="a,b,c"/></TextBlock>
+                        <TextBlock Canvas.Left="83.998" Canvas.Top="70.04"><Run Text="a"/></TextBlock>
+                        <TextBlock Canvas.Left="173.997" Canvas.Top="114.44"><Run Text="c"/></TextBlock>
+                        <TextBlock Canvas.Left="223.331" Canvas.Top="70.04"><Run Text="b"/></TextBlock>
+                        <TextBlock Canvas.Left="225.329" Canvas.Top="144.764"><Run Text="b,c"/></TextBlock>
+                        <TextBlock Canvas.Left="132.662" Canvas.Top="114.44"><Run Text="a"/></TextBlock>
+                        <Border BorderBrush="#FF29A3F7" Height="50" Canvas.Left="360" Canvas.Top="169" CornerRadius="10" BorderThickness="1">
+                            <TextBox x:Name="txtLetter" VerticalAlignment="Center"  Text="." Height="45" Margin="2" Width="60" FontSize="36" TextWrapping="Wrap" TextAlignment="Center" BorderBrush="{x:Null}" IsReadOnly="True"/>
+                        </Border>
+
+                    </Canvas>
+                </Grid>
             </GroupBox>
         </Grid>
     </Grid>
