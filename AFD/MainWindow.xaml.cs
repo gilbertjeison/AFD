@@ -16,7 +16,8 @@ namespace AFD
         private Storyboard storyboard = new Storyboard();
         DoubleAnimation da = new DoubleAnimation();        
         state cPos = state.sq0;
-        int secs = 0;
+        int secs = 2;
+        bool valid = false;
 
         enum state
         {
@@ -25,14 +26,13 @@ namespace AFD
 
         public MainWindow()
         {
-            InitializeComponent();
-            storyboard.Completed += Storyboard_Completed;
+            InitializeComponent();          
         }
 
         private async void btnIniciar_Click(object sender, RoutedEventArgs e)
         {
             string str = txtCadena.Text.ToString().Trim();
-            
+            valid = false;
 
             if (ValidLang(str))
             {
@@ -43,14 +43,24 @@ namespace AFD
                     if (i==0)
                     {                        
                        MarkStep(state.sq0, chars[i]);
-                        await Task.Delay(TimeSpan.FromSeconds(4));
+                       await Task.Delay(TimeSpan.FromSeconds(4));
                     }
                     else
                     {                                                       
                         MarkStep(cPos, chars[i]);
                         await Task.Delay(TimeSpan.FromSeconds(secs * 2));
-                    }                    
-                }                
+                    }
+                }
+
+                //VERIFICAR RESULTADOS
+                if (valid)
+                {
+                    MessageBox.Show("La cadena ingresada SI cumple con el requerimiento!");
+                }
+                else
+                {
+                    MessageBox.Show("La cadena ingresada NO cumple con el requerimiento!");
+                }               
             }
             else
             {
@@ -83,8 +93,7 @@ namespace AFD
                     AnimateControlReturn(q0Return, HeightProperty);
 
                     secs = 2;
-                }
-               
+                }               
             }
             if (s == state.sq1)
             {
@@ -95,6 +104,8 @@ namespace AFD
                     AnimateControl(q1, Shape.StrokeThicknessProperty);
                     await Task.Delay(TimeSpan.FromSeconds(2));
                     AnimateControlReturn(q1Return, HeightProperty);
+
+                    secs = 2;
                 }
                 if (c.Equals('b'))
                 {
@@ -103,10 +114,58 @@ namespace AFD
                     AnimateControl(q1, Shape.StrokeThicknessProperty);
                     await Task.Delay(TimeSpan.FromSeconds(2));
                     AnimateControl(q1Lineb, CompositeShape.StrokeThicknessProperty);
-                    
-                    
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    AnimateControl(q2, Shape.StrokeThicknessProperty);
+                    //secs = 2;
                 }
+                if (c.Equals('c'))
+                {
+                    cPos = state.sq3;
+                    txtLetter.Text = c.ToString();
+                    AnimateControl(q1, Shape.StrokeThicknessProperty);
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    AnimateControl(q1Linec, CompositeShape.StrokeThicknessProperty);
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    AnimateControl(q3, Shape.StrokeThicknessProperty);
+
+                    secs = 3;
+                }
+            }
+            if (s == state.sq2)
+            {
+                cPos = state.sq2;
+                txtLetter.Text = c.ToString();
+                AnimateControl(q2, Shape.StrokeThicknessProperty);
+                await Task.Delay(TimeSpan.FromSeconds(2));
+                AnimateControlReturn(q2Return, HeightProperty);
+
                 secs = 2;
+                valid = true;
+            }
+            if (s == state.sq3)
+            {
+                if (c.Equals('a'))
+                {
+                    cPos = state.sq1;
+                    txtLetter.Text = c.ToString();
+                    AnimateControl(q3, Shape.StrokeThicknessProperty);
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    AnimateControl(q3Line, CompositeShape.StrokeThicknessProperty);
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    AnimateControl(q1, Shape.StrokeThicknessProperty);
+
+                    secs = 3;
+                }
+                if (c.Equals('b') || c.Equals('c'))
+                {
+                    cPos = state.sq3;
+                    txtLetter.Text = c.ToString();
+                    AnimateControl(q3, Shape.StrokeThicknessProperty);
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    AnimateControlReturn(q3Return, HeightProperty);
+
+                    secs = 2;
+                }
             }
         }
 
@@ -125,11 +184,6 @@ namespace AFD
             storyboard.Begin(fe);
 
             return storyboard;
-        }
-
-        private void Storyboard_Completed(object sender, EventArgs e)
-        {
-            //txtLetter.Text = ".";
         }
 
         private void AnimateControlReturn(FrameworkElement fe, object animation)
