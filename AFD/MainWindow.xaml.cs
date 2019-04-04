@@ -1,7 +1,6 @@
 ﻿using Microsoft.Expression.Controls;
 using System;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
