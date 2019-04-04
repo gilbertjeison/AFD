@@ -26,7 +26,8 @@ namespace AFD
 
         public MainWindow()
         {
-            InitializeComponent();          
+            InitializeComponent();
+            txtCadena.Focus();
         }
 
         private async void btnIniciar_Click(object sender, RoutedEventArgs e)
@@ -37,6 +38,11 @@ namespace AFD
             if (ValidLang(str))
             {
                 char[] chars = str.ToCharArray();
+
+                if (str.Contains("ab"))
+                {
+                    valid = true;
+                }
                 
                 for (int i = 0; i < chars.Length; i++)
                 {
@@ -52,15 +58,19 @@ namespace AFD
                     }
                 }
 
-                //VERIFICAR RESULTADOS
-                if (valid)
+                await Task.Run(()=> 
                 {
-                    MessageBox.Show("La cadena ingresada SI cumple con el requerimiento!");
-                }
-                else
-                {
-                    MessageBox.Show("La cadena ingresada NO cumple con el requerimiento!");
-                }               
+                    //VERIFICAR RESULTADOS
+                    if (valid)
+                    {
+                        MessageBox.Show("La cadena ingresada SI cumple con el requerimiento!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("La cadena ingresada NO cumple con el requerimiento!");
+                    }
+                });
+                            
             }
             else
             {
@@ -133,14 +143,14 @@ namespace AFD
             }
             if (s == state.sq2)
             {
+                valid = true;
                 cPos = state.sq2;
                 txtLetter.Text = c.ToString();
                 AnimateControl(q2, Shape.StrokeThicknessProperty);
                 await Task.Delay(TimeSpan.FromSeconds(2));
                 AnimateControlReturn(q2Return, HeightProperty);
 
-                secs = 2;
-                valid = true;
+                secs = 2;                
             }
             if (s == state.sq3)
             {
